@@ -27,8 +27,7 @@
 </body>
 </html>
 <?php
-ini_set('error_reporting', E_ALL);
-error_reporting(E_ALL);
+
 if (isset($_REQUEST['submit'])) {
   $pname=$_REQUEST['pname'];
 $color=$_REQUEST['pcolor'];
@@ -36,7 +35,7 @@ $price=$_REQUEST['price'];
  $conn=new mysqli("localhost","root","root","mydb");
   $str="insert into product(productName,color,Price) values('$pname','$color','$price')";
   $sql=$conn->query($str);
- echo $str;
+ //echo $str;
   if($sql==true)
  {
    
@@ -47,20 +46,19 @@ $price=$_REQUEST['price'];
   $arr["price"]=$price;
   $arr["color"]=$color;
   $data_string = json_encode($arr);
-  print_r($data_string); 
+  //print_r($data_string); 
   $curl = curl_init();
-  curl_setopt($curl, CURLOPT_URL, "http://192.168.200.53/demophp/MainSite/insdata.php");
+  curl_setopt($curl, CURLOPT_URL, "http://192.168.200.53/demophp/ChildSite/insdata.php");
   curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
   curl_setopt($curl, CURLOPT_POST, 1);
   curl_setopt($curl, CURLOPT_POSTFIELDS,$data_string);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($curl,  CURLOPT_HTTPHEADER,array('Content-Type: application/json','Content-Length: ' .strlen($data_string))); 
   $result = curl_exec($curl);
-  echo $result;
-echo $result;
+  print_r($result);
+  
   curl_close($curl);
-//  header('location:insdata.php');
- // }
+  }
 }
 
 ?>
