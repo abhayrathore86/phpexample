@@ -29,7 +29,7 @@
 <?php
 
 if (isset($_REQUEST['submit'])) {
-  $pname=$_REQUEST['pname'];
+$pname=$_REQUEST['pname'];
 $color=$_REQUEST['pcolor'];
 $price=$_REQUEST['price'];
  $conn=new mysqli("localhost","root","root","mydb");
@@ -39,7 +39,7 @@ $price=$_REQUEST['price'];
   if($sql==true)
  {
    
-   $last_id=mysqli_insert_id($conn);
+  $last_id=mysqli_insert_id($conn);
   $arr=array();
   $arr["pid"]=$last_id;
   $arr["pname"]=$pname;

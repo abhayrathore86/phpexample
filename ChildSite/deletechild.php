@@ -5,17 +5,15 @@
 	
 	//var_dump($json);
     $lid=$json->pid;
-    $pname=$json->pname;
-    $price=$json->price;
-    $color=$json->color;
+    
    
      $conn=new mysqli("localhost","root","root","Child_Site");
-	  $str="insert into product1(Main_site_id,productName,color,Price) values($lid,'$pname','$color',$price)";
+	  $str="delete from product1 where Main_site_id=$lid";
 	  //echo $str;
 	  $sql=$conn->query($str);
 	  if ($sql)
   		{
-  			echo "1 record added";
+  			//echo "1 record added";
   			//echo "<h2>Main Site Table</h2>";
   			$connMain=new mysqli("localhost","root","root","mydb");
 		  	$selectSQL = 'select * from product';
@@ -23,6 +21,7 @@
 		  if( !( $selectRes = $connMain->query($selectSQL) ) ){
 		    echo 'Retrieval of data from Database Failed - #'.mysql_errno().': '.mysql_error();
 		  }else{
+
 		  	echo '<table align="center"><tr><td>';
 		  	echo '<table border="2">';
 		  	echo '<caption><h2>Main Site Table</h2></caption>';
@@ -76,10 +75,12 @@
 		        }
 		      }
 			echo '</table>'; 
-			echo '</td></tr></table>';
+			echo '</td></tr></table>'; 
 			}
   		}
+  		echo '<br/><center><a href="http://192.168.200.53/demophp/MainSite/insert.php"><button><h4>Insert New Data</h4></button></a></center>';
+  		
 	  //
 	  //echo $sql;
 	  //return $sql;
-?>
+?> 		
