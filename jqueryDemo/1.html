@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="slidescript.js"></script>
+	<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+	<script type="text/javascript">
+		jQuery(function($) { 
+
+  			// settings
+		  var $slider = $('.slider'); // class or id of carousel slider
+		  var $slide = 'li'; // could also use 'img' if you're not using a ul
+		  var $transition_time = 1000; // 1 second
+		  var $time_between_slides = 2000; // 4 seconds
+
+		  function slides(){
+		    return $slider.find($slide);
+		  }
+
+		  slides().fadeOut();
+
+		  // set active classes
+		  slides().first().addClass('active');
+		  slides().first().fadeIn($transition_time);
+
+		  // auto scroll 
+		  $interval = setInterval(
+		    function(){
+		      var $i = $slider.find($slide + '.active').index();
+
+		      slides().eq($i).removeClass('active');
+		      slides().eq($i).fadeOut($transition_time);
+
+		      if (slides().length == $i + 1) $i = -1; // loop to start
+
+		      slides().eq($i + 1).fadeIn($transition_time);
+		      slides().eq($i + 1).addClass('active');
+		    }
+		    , $transition_time +  $time_between_slides 
+		  );
+
+		});
+	</script>
+	<style type="text/css">
+		.slider {
+		  margin: 10px 0;
+		  width: 800px; /* Update to your slider width */
+		  height: 500px; /* Update to your slider height */
+		  position: relative;
+		  overflow: hidden;
+		}
+
+		.slider li {
+		  display: none;
+		  position: absolute; 
+		  top: 0px; 
+		  left:0px; 
+		}
+		img{
+			width: 800px; /* Update to your slider width */
+		  height: 400px; /* Update to your slider height */
+		}
+	</style>
+
+</head>
+<body><center>
+<ul class="slider" id="slide">
+</ul></center>
+
+</body>
+</html>
